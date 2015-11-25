@@ -1,0 +1,53 @@
+	.data
+i:
+	.word	1
+j:
+	.word	1
+temp:
+	.word	0
+k:
+	.word	0
+n:
+	.word	0
+isPrime:
+	.word	0
+$LC0:
+	.asciiz	"[-] How many terms do you need? "
+$LC1:
+	.asciiz	"%d "
+$LC2:
+	.asciiz	"%d "
+
+	.text
+	.ent	main
+main:
+	la	$4,$LC0
+	jal	printf
+	la	$4,$LC1
+	la	$5,n
+	jal	scanf
+	sw	$0,k
+$L2:
+	lw	$2,k
+	lw	$3,n
+	slt	$2,$2,$3
+	bne	$2,$0,$L5
+	j	$L3
+$L5:
+	la	$4,$LC2
+	lw	$5,i
+	jal	printf
+	lw	$2,i
+	sw	$2,temp
+	lw	$2,j
+	sw	$2,i
+	lw	$3,j
+	lw	$2,temp
+	addu	$2,$3,$2
+	sw	$2,j
+	lw	$2,k
+	addu	$2,$2,1
+	sw	$2,k
+	j	$L2
+$L3:
+	.end	main
